@@ -20,7 +20,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:spanCount="2"
-            app:list="@{viewModel.popularMovies}"
+            app:list="@{viewModel.popularMoviesLiveData}"
             tools:listitem="@layout/view_movie_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

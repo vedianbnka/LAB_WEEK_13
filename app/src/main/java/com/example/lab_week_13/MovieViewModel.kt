@@ -1,6 +1,8 @@
 package com.example.lab_week_13
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.lab_week_13.model.Movie
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +21,7 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
     }
     private val _popularMovies = MutableStateFlow<List<Movie>>(emptyList())
     val popularMovies: StateFlow<List<Movie>> get() = _popularMovies
-
+    val popularMoviesLiveData = _popularMovies.asLiveData()
     private val _error = MutableStateFlow("")
     val error: StateFlow<String> get() = _error
 
@@ -32,6 +34,7 @@ class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel()
                 // catch is an operator that catches exceptions from the Flow
                 .catch { e ->
                     _error.value = "An exception occurred: ${e.message}"
+                    Log.e("MovieViewModel", "An exception occurred: ${e.message}")
                 }
                 // collect is a terminal operator that collects the values from the Flow
                 // the results are emitted to the StateFlow
