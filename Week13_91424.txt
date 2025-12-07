@@ -1,0 +1,45 @@
+Link Github : https://github.com/vedianbnka/LAB_WEEK_13/
+
+Assignment
+
+1. Why is MVVM important? Which files represent Model, which files represent
+View, and which files represent ViewModel?Mengapa MVVM itu penting? File mana yang menjadi Model, View, dan ViewModel?
+MVVM penting karena memisahkan tampilan (View) dari logika bisnis (ViewModel) dan lapisan data (Model). Dengan pemisahan ini, aplikasi menjadi lebih mudah dipelihara, diuji, dan dikembangkan. Perubahan pada tampilan tidak mempengaruhi logika data, dan perubahan pada logika tidak mempengaruhi tampilan.
+
+– Model: Movie.kt, MovieDao.kt, MovieDatabase.kt, MovieRepository.kt
+– View: activity_main.xml, MainActivity.kt, MovieAdapter.kt, DetailsActivity.kt, activity_details.xml
+– ViewModel: MovieViewModel.kt
+
+2. In Part 1, you implemented Data Binding, why is this more efficient than using
+the normal method?
+Data Binding lebih efisien karena View bisa langsung terhubung ke data di ViewModel tanpa membutuhkan findViewById atau update UI secara manual. UI akan otomatis berubah ketika data di ViewModel berubah.
+Keuntungannya:
+- Mengurangi boilerplate code.
+- Mengurangi risiko error seperti NullPointerException.
+- Memisahkan logika UI dan data dengan lebih bersih.
+- Mempercepat pengembangan karena update UI terjadi secara otomatis berdasarkan data.
+
+3. In Part 2, you implemented the Singleton Pattern, why is this important?
+Singleton Pattern penting karena memastikan hanya ada satu instance database di seluruh aplikasi. Hal ini diperlukan karena:
+- Menghindari pembuatan database berulang yang dapat menyebabkan beban memori besar.
+- Mencegah race condition ketika banyak thread mengakses database secara bersamaan.
+- Menjaga konsistensi data.
+- Menjadi cara terbaik untuk mengakses Room Database di seluruh aplikasi.
+
+
+4. In Part 2 & 3, you implemented the Repository Pattern, why is this important?
+Repository Pattern penting karena menjadi perantara antara ViewModel dan sumber data (API dan database lokal). Manfaatnya:
+- Data dapat disinkronkan dengan API dan tetap tersedia secara offline.
+- ViewModel tidak perlu mengetahui apakah data berasal dari API atau Room.
+- Kode lebih terstruktur, bersih, dan mudah diuji.
+- Memudahkan pengelolaan caching dan pengambilan data.
+- Memisahkan logika akses data dari logika presentasi.
+
+5. In part 3, you implemented the Worker Manager, is there another way to refresh your database with the latest data other than using Worker?
+Ada beberapa alternatif lain untuk memperbarui data:
+1. Manual Refresh (pull-to-refresh): pengguna perlu menarik layar untuk mengambil data baru.
+2. Foreground Service: berjalan saat aplikasi aktif, tetapi tidak cocok untuk tugas berkala jangka panjang.
+3. AlarmManager: dapat menjadwalkan tugas, tetapi tidak seandal WorkManager terutama untuk constraints baterai dan reboot device.
+4. Firebase Cloud Messaging (FCM): server mengirim notifikasi untuk memicu refresh data jika ada pembaruan.
+
+Namun, WorkManager tetap merupakan solusi terbaik untuk tugas latar belakang yang terjadwal dan tetap berjalan meskipun aplikasi ditutup atau perangkat direstart.
